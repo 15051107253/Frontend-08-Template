@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋</title>
+</head>
+<style>
+    .wrap{
+        position: relative;
+        width: 600px;
+        height: 600px;
+        margin: 100px auto;
+    }
+    .bgTable{
+        padding: 40px;
+        background-color: rgb(175, 110, 13);
+        float: left;
+    }
+    .bgTableCell{
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        vertical-align: middle;
+        background-color: rgb(240, 178, 9);
+        border: 1px solid white;
+    }
+    .chessTable{
+        position: absolute;
+        left: 14px;
+        top: 14px;
+    }
+    .chessTableCell{
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        vertical-align: middle;
+        border: 1px solid transparent;
+    }
+
+    .blackChess, .whiteChess{
+        margin: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    .blackChess{
+        background: radial-gradient(circle,#fff, #000);
+    }
+    .whiteChess{
+        background: radial-gradient(circle,#fff, #ddd);
+    }
+
+</style>
+<body>
+    <div class="wrap">
+        <div id="bgTable" class="bgTable"></div>
+        <div id="chessTable" class="chessTable"></div>
+    </div>
+
+
+
+    <script>
+
+        var pattern = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ]
+
+        let color = 1;
+        let sleep = 20;
+
+        function createBgTable(pattern) {
+            let len = pattern.length - 1;
+            let bgTable = document.getElementById('bgTable');
+            for (let i = 0; i < len; i++) {
+                // 创建行容器
+                let row = document.createElement('div');
+                for (let j = 0; j < len; j++) {
+                    let cell = document.createElement('div');
+                    cell.classList.add('bgTableCell');
+                    row.appendChild(cell);
+                }
+                bgTable.appendChild(row);
+            }
+        }
+
+        function createChess() {
+            let blackChess = document.createElement('div');
+            blackChess.classList.add('blackChess');
+            let whiteChess = document.createElement('div');
+            whiteChess.classList.add('whiteChess');
+            return {
+                blackChess,
+                whiteChess
+            }
+        }
+
+
+        function createChessTable(pattern) {
+            
+            let len = pattern.length;
+            let chessTable = document.getElementById('chessTable');
+            chessTable.innerHTML = '';
+            for (let i = 0; i < len; i++) {
+                // 创建行容器
+                let row = document.createElement('div');
+                for (let j = 0; j < len; j++) {
+                    let cell = document.createElement('div');
+                    cell.classList.add('chessTableCell');
+                    if (pattern[i][j] == 1) {
+                        let Chess = createChess();
+                        cell.appendChild(Chess.blackChess);
+                    }else if (pattern[i][j] == 2) {
+                        let Chess = createChess();
+                        cell.appendChild(Chess.whiteChess);
+                    }
+                    cell.addEventListener('click',() => {userMove(i, j)})
+                    row.appendChild(cell);
+                   
+                }
+                chessTable.appendChild(row);
+            }
+        }
+
+
+        function userMove(i, j) {
+            if (pattern[i][j]) {
+                return false;
+            }
+            pattern[i][j] = color;
+            if (check(pattern, color, i, j)) {
+                alert(color == 1 ? '黑棋赢了' : '白棋赢了');
+            }
+            color = 3 - color;
+            createChessTable(pattern);
+        }
+
+
+        
+
+        function check(pattern, color, x, y) {
+            // color 当前棋子颜色 1 黑 2白
+            // 判断横方向
+            {
+                let count = 0;
+                for (let i = 0; i < pattern.length; i++) {
+                    if (pattern[x][i] == color) {
+                        count ++;
+                    }else {
+                        continue;
+                        count = 0;
+                    }
+                    if (count == 5) {
+                        return true;
+                    }
+                }
+            }
+
+            // 判断竖方向
+            {
+                let count = 0;
+                for (let i = 0; i < pattern.length; i++) {
+                    if (pattern[i][y] == color) {
+                        count ++;
+                    }else {
+                        continue;
+                        count = 0;
+                    }
+                    if (count == 5) {
+                        return true;
+                    }
+                }
+            }
+
+            // 判断右斜方向
+            {
+                let count = 0;
+                if (x > y) {
+                    let j = -1;
+                    for (let i = x - y; i < pattern.length; i++) {
+                        j ++;
+                        if (pattern[i][j] == color) {
+                            count ++;
+                        }else {
+                            continue;
+                            count = 0;
+                        }
+                        if (count == 5) {
+                            return true;
+                        }
+                        
+                    }
+                }else {
+                    let i = -1;
+                    for (let j = y - x; j < pattern.length; j++) {
+                        i ++;
+                        if (pattern[i][j] == color) {
+                            count ++;
+                        }else {
+                            continue;
+                            count = 0;
+                        }
+                        if (count == 5) {
+                            return true;
+                        }
+                    }
+                }
+                
+            }
+            // 判断左斜方向
+            {
+                let count = 0;
+                if ((x + y) > (pattern.length - 1)) {
+                    let j = 10;
+                    for (let i = (x + y - (pattern.length - 1)); i < pattern.length; i++) {
+                        j --;
+                        console.log(i, j);
+                        if (pattern[i][j] == color) {
+                            count ++;
+                        }else {
+                            continue;
+                            count = 0;
+                        }
+                        if (count == 5) {
+                            return true;
+                        }
+                        
+                    }
+                }else {
+                    let j = x + y + 1;
+                    for (let i = 0; i <= (x + y); i++) {
+                        j --;
+                        console.log(i, j);
+                        if (pattern[i][j] == color) {
+                            count ++;
+                        }else {
+                            continue;
+                            count = 0;
+                        }
+                        if (count == 5) {
+                            return true;
+                        }
+                    }
+                }
+                
+            }
+            
+
+
+            return false;
+        }
+
+        createBgTable(pattern);
+        createChessTable(pattern);
+
+    </script>
+</body>
+</html>
