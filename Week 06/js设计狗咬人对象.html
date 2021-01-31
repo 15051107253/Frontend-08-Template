@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>狗咬人</title>
+</head>
+<body>
+    <script>
+
+        class Dog {
+            bite() {
+                console.log('狗开始咬了');
+            }
+        }
+
+
+        class Human {
+            hurt(damage) {
+                console.log('我受伤了');
+            }
+        }
+
+        let dogA = new Dog();
+
+        let manA = new Human();
+        manA.hurt(dogA.bite());
+    </script>
+</body>
+</html>

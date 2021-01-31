@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产生式</title>
+</head>
+<body>
+    <p>
+        产生式： 在计算机中指 Tiger 编译器将源程序经过词法分析（Lexical Analysis）和语法分析（Syntax Analysis）后得到的一系列符合文法规则（Backus-Naur Form，BNF）的语句
+        <br>
+        巴科斯诺尔范式：即巴科斯范式（英语：Backus Normal Form，缩写为 BNF）是一种用于表示上下文无关文法的语言，上下文无关文法描述了一类形式语言。它是由约翰·巴科斯（John Backus）和彼得·诺尔（Peter Naur）首先引入的用来描述计算机语言语法的符号集。
+        <br>
+        终结符： 最终在代码中出现的字符
+    </p>
+
+    <script>
+        /*
+        
+            四则运算：
+                (1 + 2) * 3
+            终结符：
+                Number
+                + - * / ( )
+            非终结符：
+                MultiplicativeExpression
+                AddtiveExpression
+                BracketExpression
+            BNF
+                <MultiplicativeExpression> ::= <Number>|
+                    <MultiplicativeExpression> "*" <Number>|
+                    <MultiplicativeExpression> "/" <Number>|
+                <AddtiveExpression> ::= <MultiplicativeExpression>|
+                    <AddtiveExpression> "+" <MultiplicativeExpression>|
+                    <AddtiveExpression> "*" <MultiplicativeExpression>|
+                <BracketExpression> ::= "(" <AddtiveExpression> ")"
+        */
+
+
+    </script>
+</body>
+</html>
