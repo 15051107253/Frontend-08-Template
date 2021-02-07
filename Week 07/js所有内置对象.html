@@ -12,62 +12,6 @@
 <script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.hierarchy-0.5.0/build/hierarchy.js"></script>
 <script>
-//   $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json', function(data) {
-//     var graph = new G6.TreeGraph({
-//       container: 'mountNode',
-//       width: window.innerWidth,
-//       height: window.innerHeight,
-//       pixelRatio: 2,
-//       modes: {
-//         default: [{
-//           type: 'collapse-expand',
-//           onChange: function onChange(item, collapsed) {
-//             var data = item.get('model').data;
-//             data.collapsed = collapsed;
-//             return true;
-//           }
-//       }, 'drag-canvas', 'zoom-canvas']
-//       },
-//       defaultNode: {
-//         size: 16,
-//         anchorPoints: [[0, 0.5], [1, 0.5]],
-//         style: {
-//           fill: '#40a9ff',
-//           stroke: '#096dd9'
-//         }
-//       },
-//       defaultEdge: {
-//         shape: 'cubic-horizontal',
-//         style: {
-//           stroke: '#A3B1BF'
-//         }
-//       },
-//       layout: {
-//         type: 'dendrogram',
-//         direction: 'LR', // H / V / LR / RL / TB / BT
-//         nodeSep: 30,
-//         rankSep: 100
-//       }
-//     });
-
-//     graph.node(function(node) {
-//       return {
-//         size: 26,
-//         style: {
-//           fill: '#40a9ff',
-//           stroke: '#096dd9'
-//         },
-//         label: node.id,
-//         labelCfg: {
-//           position: node.children && node.children.length > 0 ? 'left' : 'right'
-//         }
-//       };
-//     });
-
-//     graph.data(data);
-//     graph.render();
-//     graph.fitView();
-//   });
 
     var props = ['Array','BigInt','Boolean','DataView','Date','Error','Function','Generator'
     ,'JSON','Map','Math','NaN','Number','Object','Promise','Proxy','RegExp','Set','String','Symbol','null','undefined'];
