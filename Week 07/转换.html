@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字、字符串相互转换</title>
+</head>
+<body>
+    <script>
+        function StringToNumber(str) {
+            return Number(str);
+        }
+
+
+
+        // 整数，转换进制为 2 - 16
+        function NumberToString(number, radix) {
+            if (radix == 1) {
+                return false;
+            }
+            var radixProp = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+            let stack = [];
+            do {
+                stack.push(number % radix);
+                number = Math.floor(number / radix);
+            } while (number > 0);
+
+            var str = '';
+            while(stack.length > 0) {
+                str += radixProp[stack.pop()];
+            }
+            return str;
+        }
+
+        
+
+    </script>
+</body>
+</html>
