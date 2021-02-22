@@ -179,6 +179,9 @@ class TrunkedBodyParser {
                 this.current = this.READING_TRUNK;
             }
         }else if(this.current === this.READING_TRUNK) {
+            if (this.isFinished) {
+                return ;
+            }
             this.content.push(char);
             this.length --;
             if (this.length === 0) {
