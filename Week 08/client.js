@@ -29,8 +29,11 @@ class Requset {
                 connection = net.createConnection({
                     host: this.host,
                     port: this.port
-                }, () => {
+                },() => {
+                    console.log('123213');
+                    console.log(this.toString());
                     connection.write(this.toString());
+                    
                 })
             }
             connection.on('data', (data) => {
@@ -49,11 +52,10 @@ class Requset {
     }
 
     toString() {
-        return `${this.method} ${this.path} HTTP/1.1\r
-        ${Object.keys(this.headers).map(key => `${key}: ${this.headers[key]}`).join('\r\n')}\r
-        \r
-        ${this.bodyText}
-        `;
+        return `${this.method} ${this.path} HTTP/1.1
+${Object.keys(this.headers).map(key => `${key}: ${this.headers[key]}`).join('\r\n')}
+
+${this.bodyText}`;
     }
 
 }
@@ -141,7 +143,7 @@ class ResponseParser {
                 this.current = this.WAITING_BODY;
             }
         }else if(this.current === this.WAITING_BODY) {
-            this.bodyParser.receiveChar(Char);
+            this.bodyParser.receiveChar(char);
         }
     }
 }
